@@ -224,7 +224,7 @@ mod tests {
             assert_eq!(expected_public_key, public_key.0);
             assert_eq!(expected_private_key, private_key.0);
         }));
-        let _ = child1.join();
-        let _ = child2.join();
+        unwrap!(child1.join());
+        unwrap!(child2.join());
     }
 }
