@@ -499,8 +499,8 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected_public_key</span>, <span class='ident'>public_key</span>.<span class='number'>0</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>expected_private_key</span>, <span class='ident'>private_key</span>.<span class='number'>0</span>);
         }));
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>child1</span>.<span class='ident'>join</span>();
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>child2</span>.<span class='ident'>join</span>();
+        <span class='macro'>unwrap</span><span class='macro'>!</span>(<span class='ident'>child1</span>.<span class='ident'>join</span>());
+        <span class='macro'>unwrap</span><span class='macro'>!</span>(<span class='ident'>child2</span>.<span class='ident'>join</span>());
     }
 }
 </pre>
