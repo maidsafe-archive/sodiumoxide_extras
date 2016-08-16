@@ -157,16 +157,16 @@ mod ffi {
 /// will generate identical keys.
 #[allow(unsafe_code)]
 pub fn init_with_rng<T: Rng>(rng: &mut T) -> Result<(), i32> {
+    let seed = [rng.gen(), rng.gen(), rng.gen(), rng.gen()];
     let mut init_result = &mut *unwrap!(INIT_RESULT.lock());
     if let Some(ref existing_result) = *init_result {
         return if *existing_result == 0 {
-            Ok(())
+            Ok(RNG.with(|rng| *rng.borrow_mut() = XorShiftRng::from_seed(seed)))
         } else {
             Err(*existing_result)
         };
     }
     let mut sodium_result;
-    let seed = [rng.gen(), rng.gen(), rng.gen(), rng.gen()];
     {
         let random_bytes = &mut *unwrap!(RANDOM_BYTES_IMPL.lock());
         random_bytes.seed = seed;
